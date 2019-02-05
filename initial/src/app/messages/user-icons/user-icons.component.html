@@ -1,0 +1,6 @@
+<div mat-list-avatar class="icon-container">
+  <div *ngFor="let user of users">
+    <img mat-list-avatar *ngIf="user.picture" [src]="user.picture" />
+    <div mat-list-avatar [ngClass]="'letter'" [ngStyle]="{'background-color': user.color}" *ngIf="!user.picture">{{user.firstName[0]}}</div>
+  </div>
+</div>

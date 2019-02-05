@@ -1,0 +1,6 @@
+<mat-list-item *ngIf="lastMessage">
+  <app-user-icons mat-list-avatar [users]="lastMessage.users"></app-user-icons>
+  <h4 mat-line>{{lastMessage.users[0].firstName}}</h4>
+  <p mat-line>{{lastMessage.message.messagetext}}</p>
+  <span>{{lastMessage.message.timestamp | fuzzytime}}</span>
+</mat-list-item>

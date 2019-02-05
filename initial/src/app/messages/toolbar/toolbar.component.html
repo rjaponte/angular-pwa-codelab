@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+      <a mat-button [disableRipple]="true" [routerLink]="[ '/' ]" class="title">Messages</a>
+      <div class="icon-container">
+          <button mat-icon-button>
+              <mat-icon>search</mat-icon>
+          </button>
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+              <a [routerLink]="[ '/settings' ]"><button mat-menu-item>Settings</button></a>
+          </mat-menu>
+      </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<a routerLink="/new" mat-fab color="accent" [ngClass]="'new-message'">
+  <mat-icon aria-label="Create new message">message</mat-icon>
+</a>
