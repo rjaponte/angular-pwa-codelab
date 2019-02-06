@@ -1,3 +1,12 @@
+import * as functions from 'firebase-functions';
+
+// // Start writing Firebase Functions
+// // https://firebase.google.com/docs/functions/typescript
+//
+// export const helloWorld = functions.https.onRequest((request, response) => {
+//  response.send("Hello from Firebase!");
+// });
+
 
 import * as admin from 'firebase-admin';
 import * as express from 'express';
@@ -6,16 +15,11 @@ import * as compression from 'compression';
 
 import { json } from 'body-parser';
 
-import { join } from 'path';
-
 const MESSAGES_COLLECTION = 'messages';
 
 // tslint:disable-next-line:prefer-const
-let serviceAccount = require('./firebase_key.json');
 
-const initializeApp = admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
+const initializeApp = admin.initializeApp(functions.config().firebase);
 
 if (initializeApp.instanceId) {
     console.log('Firebase has been initialized');
@@ -30,12 +34,6 @@ app.use(compression());
 app.use(json());
 
 const db = admin.firestore();
-
-let port = process.env.PORT;
-if (port == null || port === '') {
-    port = '8000';
-}
-const DIST_FOLDER = join(process.cwd(), 'dist/pwa');
 
 app.get('/api/messages', (req, res) => {
     db.collection(MESSAGES_COLLECTION).get()
@@ -79,20 +77,9 @@ app.post('/api/messages', (req, res) => {
 
 
 
-app.use(express.static(DIST_FOLDER, {
-    maxAge: '1y'
-}));
-
-
-
 // app.set('view engine', 'html');
 // app.set('views', DIST_FOLDER);
 
-
-
-app.listen(port, () => {
-    console.log(`Node Express server listening on http://localhost:${port}`);
-});
 
 // // All regular routes use the Universal engine
 // app.get('*', (req, res) => {
@@ -104,3 +91,4 @@ function handleError(res: express.Response, reason: string, message: string, cod
     res.status(code).json({ 'error': message });
 }
 
+exports.app = functions.https.onRequest(app);
