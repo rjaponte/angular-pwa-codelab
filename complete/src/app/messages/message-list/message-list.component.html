@@ -1,0 +1,4 @@
+<app-toolbar></app-toolbar>
+<mat-list>
+  <app-last-message [lastMessage]="message" *ngFor="let message of messages | async"></app-last-message>
+</mat-list>
