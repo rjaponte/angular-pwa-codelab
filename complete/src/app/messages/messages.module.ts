@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule, MatToolbarModule, MatIconModule, MatMenuModule, MatButtonModule } from '@angular/material';
 
 import { PipesModule } from '../pipes/pipes.module';
@@ -22,7 +21,6 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     MatButtonModule,
     MatListModule,
     PipesModule,
-    BrowserAnimationsModule,
     MessagesRoutingModule,
     ServicesModule,
   ]
